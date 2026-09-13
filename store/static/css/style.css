@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif;
+    background-color:lightyellow; 
+}
+nav{
+    background-color: #222;
+    color: blueviolet;
+    padding: 20px 8%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+    
+nav h1{
+    margin-right: auto;
+    color: #f5f5f5;
+    font-family: CENTURY;
+}
+nav a {
+    color: violet;
+    text-decoration: none;
+    font-size: 20px;
+}
+nav a:hover{
+    color: red;
+}
+section{
+    padding: 60px 10%;
+}
+ section:first-of-type{
+    text-align: center;
+    background-color: lightblue;
+ }
+
+section:first-of-type h2{
+    font-size: 50px;
+    color: #2C2420;
+}
+section:first-of-type p{
+    font-size:17px;
+    color: #222;
+    font-family: Comic Sans MS;
+}
+section:first-of-type h3{
+    font-size: 25px;
+    font-family: century;
+
+}
+section:first-of-type button{
+    padding: 14px 27px;
+    border : navajowhite;
+    cursor: pointer;
+    font-size: 25px;
+    background-color:black;
+    color: white;
+
+}
+section:first-of-type button:hover{
+    background-color: red;
+
+}
+/* section:last-of-type {
+    text-align: center;
+}
+section:last-of-type  h2{
+    font-size: 50px;
+    color: black;
+    margin-bottom: 40px;
+}
+section:last-of-type div{
+    background-color: rgb(207, 133, 133);
+    box-shadow:0 5px 20px rgb( 0 ,0,0,0.1) ;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    padding-left: auto;
+    padding-right: auto; 
+    margin: 20px;
+    display: inline-block;
+    border-radius: 10px;
+}*/
+
+
+section:last-of-type h3{
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+section:last-of-type p
+{
+    font-size: 15px;
+    margin-bottom: 15px;
+} */
+.products
+{
+    text-align: center;
+}
+.products h3
+{
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+.product-container{
+    display: flex;
+    justify-content: center;
+    align-items: stretch; 
+    gap: 30px  ;
+    flex-wrap: wrap;
+}
+.product-card {
+
+    width: 250px;
+    padding: 5px;
+    background-color: pink;
+    border-radius: 10px;
+    box-shadow: 0 7px 20px rgba(0, 0,0, 0.15);
+}
+.product-card h3{
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.product-card p{
+    margin-bottom: 25px;
+}
+.product-card h4 {
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.product-card button{
+    padding:10px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.product-card button:hover{
+    transform: scale(1.05);
+    color: red;
+}
+.product-card img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    
+    
+}
+footer{
+    background-color: rgb(153, 62, 145);
+    padding: 15px;
+    text-align: center;
+    color: black;
+    margin-top: 15px;
+}
+footer h2{
+    margin-bottom: 10px;
+
+}
+footer p{
+    margin: 8px 0;
+    font-size: 14px;
+} 
+.cart{
+    background-color: white;
+    padding: 50px;
+    text-align: center;
+
+}
+.cart h2{
+    font-size :40px;
+    margin-bottom : 20px;
+
+}
+.cart p{
+     font-size: 18px;
+    margin-bottom: 20px;
+}
+.cart button{
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+.cart button:hover{
+    background-color: blueviolet;
+}
+
+.login{
+    background-color: lightblue;
+    text-align:center;
+    padding: 50px;
+}
+.login h2{
+    font-family: Century;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+.login form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.login input{
+    width: 200px;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+.login button{
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: lightgoldenrodyellow;
+    color: black;
+    cursor: pointer;
+}
+.login button:hover{
+    background-color: rgb(255, 141, 255);
+}
+.login p{
+    margin-top: 20px;
+}
+
+ @media (max-width:768px) {
+    nav{
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav h2{
+        margin-right: 0;
+        text-align: center;
+    }
+    .product-container{
+         flex-direction: column;
+         align-items: center;
+    }
+    .product-card{
+        width: 250px;
+    }
+.login input{
+    width: 90%;
+    max-width: 300px;
+}
+    
+} 

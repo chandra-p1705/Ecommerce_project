@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Chan Store</title>
+     <!-- <link rel="stylesheet" href="/static/css/style.css">  -->
+     <!-- <link rel="stylesheet" href="{% static 'css/style.css'%}">  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav>
+        <h1>Welcome To Online Lumicart</h1>
+        <a href="#">HOME</a>
+        <a href="#products">PRODUCTS </a>
+        <a href="{% url 'cart' %}">CARTS</a>
+        <a href="#login">LOGIN</a>
+    </nav>
+    <section>
+        <h2>Welcome To  Lumicart - Your One-Stop Online Shopping Destination</h2>
+        <p>Discover amazing products , explore your favourite categories , and enjoy a simple and covenient shopping experience</p>
+        <h3>Shop now & Find Something You will Love!.......</h3>
+        <br>
+        <a href="#products">
+            <button>shop now</button>
+        </a>
+    </section>
+    <section class="products" id="products">
+        <h2>Handpicked For You........</h2>
+        <div class="product-container">
+        {% for product in products %}
+
+        <!-- product cards -->
+            <div class="product-card">
+                {% if product.image %}
+                <img src="{{product.image.url}}" alt="{{product.name}}">
+                {% endif %}
+            <h3>{{product.name}}</h3>
+            <p>{{product.description}}</p>
+            <h4>Price - ₹{{product.price}}</h4>
+            <p>stock:{{product.stock}}</p>
+            <a href="{% url 'add_to_cart' product.id %}">
+            <button>Add to Cart</button>
+            </a>
+        </div>
+         {% empty%}
+        <p>No Stock Available</p>
+        {% endfor %}
+         </div>
+    
+    </section>
+    <section class="cart" id="cart">
+        <h2>your cart</h2>
+        <p>Your cart is waiting for some goodies!</p>
+        <button>Continue shopping</button>
+    </section>
+    <section class="login" id="login">
+        <h2>Login</h2>
+        <form>
+            <input type="email" placeholder="Enter your Email id">
+            <input type="password" placeholder="Enter your password">
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account ? <a href="#"> sign up</a></p>
+    </section>
+   
+    <footer>
+        <h2>Lumicart</h2>
+        <p>Your One-Stop Online Shopping Destination</p>
+        <p>© 2026 Lumicart.All Rights Reserved</p>
+       
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - LumiCart</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <nav>
+        <h1>LumiCart</h1>
+        <a href="{% url 'home' %}">HOME</a>
+        <a href="{% url 'cart' %}">CART</a>
+    </nav>
+
+    <section class="cart">
+        <h2>Your Shopping Cart </h2>
+
+        {% if cart_items %}
+
+            {% for item in cart_items %}
+
+            <div class="product-card">
+
+                {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                {% endif %}
+
+                <h3>{{ item.product.name }}</h3>
+
+                <p>{{ item.description }}</p>
+
+                <h4>Price: ₹{{ item.product.price }}</h4>
+                <div> <a href="{% url 'decrease_quantity' item.product.id %}"> 
+                    <button>-</button> 
+                </a> 
+                <span> {{ item.quantity }} </span>
+                 <a href="{% url 'increase_quantity' item.product.id %}"> 
+                    <button>+</button> 
+                </a> 
+            </div>
+
+               
+
+
+
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <h3>Your cart is waiting for some goodies!</h3>
+
+            <a href="{% url 'home' %}">
+                <button>Continue Shopping</button>
+            </a>
+
+        {% endif %}
+
+    </section>
+
+</body>
+</html>
