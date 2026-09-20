@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .success-box {
+            background: white;
+            width: 450px;
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .success-icon {
+            font-size: 55px;
+        }
+
+        h1 {
+            color: #2e7d32;
+        }
+
+        .details {
+            text-align: left;
+            margin-top: 25px;
+            line-height: 1.8;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="success-box">
+
+    <div class="success-icon">✅</div>
+
+    <h1>Order Placed Successfully!</h1>
+
+    <p>Thank you for your order, {{ order.full_name }}.</p>
+
+    <div class="details">
+        <strong>Order Details</strong><br>
+        Name: {{ order.full_name }}<br>
+        Email: {{ order.email }}<br>
+        Phone: {{ order.phone }}<br>
+        City: {{ order.city }}<br>
+        Pincode: {{ order.pincode }}<br>
+        Total Amount: ₹{{ order.total_price }}<br>
+        Order Date: {{ order.created_at }}
+    </div>
+
+    <a href="{% url 'home' %}" class="shop-btn">
+        Continue Shopping
+    </a>
+
+</div>
+
+</body>
+</html>

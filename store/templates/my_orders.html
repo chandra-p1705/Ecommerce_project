@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders - Chan Store</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .order-card p {
+            margin: 8px 0;
+        }
+
+        .amount {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .empty {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>My Orders 📦</h1>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+            <div class="order-card">
+
+                <p><strong>Order ID:</strong> {{ order.id }}</p>
+
+                <p><strong>Name:</strong> {{ order.full_name }}</p>
+
+                <p><strong>Email:</strong> {{ order.email }}</p>
+
+                <p><strong>City:</strong> {{ order.city }}</p>
+
+                <p><strong>Pincode:</strong> {{ order.pincode }}</p>
+
+                <p class="amount">
+                    Total Amount: ₹{{ order.total_price }}
+                </p>
+
+                <p>
+                    <strong>Order Date:</strong>
+                    {{ order.created_at }}
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            <h2>No Orders Yet</h2>
+            <p>You haven't placed any orders yet.</p>
+        </div>
+
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="back-btn">
+        ← Continue Shopping
+    </a>
+
+</div>
+
+</body>
+</html>

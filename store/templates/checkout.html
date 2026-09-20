@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Checkout - LumiCart</title>
+
+<link rel="stylesheet"
+      href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h1>LumiCart</h1>
+
+    <div>
+
+        <a href="{% url 'home' %}">
+            HOME
+        </a>
+
+        <a href="{% url 'cart' %}">
+            CART
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="checkout-page">
+
+    <h2>Checkout</h2>
+
+
+    <div class="checkout-layout">
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <div class="customer-details">
+
+            <h2>Customer Details</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label>Full Name</label>
+
+                <input type="text"
+                        name="full_name"
+                       placeholder="Enter your full name"
+                       required>
+                       <br>
+                       <br>
+
+
+                <label>Email</label>
+
+                <input type="email"
+                name="email"
+                       placeholder="Enter your email"
+                       required>
+                    <br>
+                    <br>
+
+                <label>Phone Number</label>
+
+                <input type="tel"
+                name="phone"
+                       placeholder="Enter your phone number"
+                       required>
+                    <br>
+                    <br>
+
+                <label>Address</label>
+
+                <textarea
+                    name="address"
+                    placeholder="Enter your delivery address"
+                    required></textarea>
+                    <br>
+                    <br>
+
+                <label>City</label>
+
+                <input type="text"
+                       name="city" 
+                       placeholder="Enter your city"
+                       required>
+                    <br>
+                    <br>
+                <label>Pincode</label>
+
+                <input type="text"
+                       name="pincode" 
+                       placeholder="Enter your pincode"
+                       required>
+                    <br>
+                    <br>
+                <button type="submit " class="check"
+                        class="checkout-btn">
+
+                    Place Order
+                        <br>
+                        <br>
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="order-summary">
+
+            <h2>Order Summary</h2>
+
+
+            {% for item in cart_items %}
+
+            <div class="summary-row">
+
+                <span>
+                    {{ item.product.name }}
+                    x {{ item.quantity }}
+                </span>
+
+                <span>
+                    ₹{{ item.item_total }}
+                </span>
+
+            </div>
+
+            {% endfor %}
+
+
+            <hr>
+
+
+            <div class="summary-total">
+
+                <span>Total</span>
+
+                <span>
+                    ₹{{ total_price }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

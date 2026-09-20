@@ -7,15 +7,21 @@
      <title>Chan Store</title>
      <!-- <link rel="stylesheet" href="/static/css/style.css">  -->
      <!-- <link rel="stylesheet" href="{% static 'css/style.css'%}">  -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <nav>
         <h1>Welcome To Chan store</h1>
-        <a href="#">HOME</a>
+       <a href="{% url 'home' %}">HOME</a>
         <a href="#products">PRODUCTS </a>
         <a href="{% url 'cart' %}">CARTS</a>
-        <a href="#login">LOGIN</a>
+       {% if user.is_authenticated %}
+    <span>Welcome, {{ user.username }}</span>
+    <a href="{% url 'my_orders' %}">MY ORDERS</a>
+    <a href="{% url 'logout' %}">LOGOUT</a>
+{% else %}
+    <a href="{% url 'login' %}">LOGIN</a>
+{% endif %}
     </nav>
     <section>  
         <h2>Welcome To  Lumicart - Your One-Stop Online Shopping Destination</h2>
@@ -55,15 +61,7 @@
         <p>Your cart is waiting for some goodies!</p>
         <button>Continue shopping</button>
     </section>
-    <section class="login" id="login">
-        <h2>Login</h2>
-        <form>
-            <input type="email" placeholder="Enter your Email id">
-            <input type="password" placeholder="Enter your password">
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account ? <a href="#"> sign up</a></p>
-    </section>
+    
    
     <footer>
         <h2>Lumicart</h2>
