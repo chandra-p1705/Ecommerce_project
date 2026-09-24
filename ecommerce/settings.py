@@ -147,6 +147,12 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+STORAGES = {
+    "default": {
+        "BACKEND": "store.vercel_storage.VercelBlobStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
