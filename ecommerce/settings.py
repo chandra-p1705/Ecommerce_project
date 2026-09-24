@@ -31,7 +31,10 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://ecommerce-project-d6mc.vercel.app",
+    "https://*.vercel.app",
+]
 
 # Application definition
 
@@ -146,4 +149,4 @@ MAILERS = {
 }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
