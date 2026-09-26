@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 def home(request):
     products= Product.objects.all()
+    print("PRODUCT COUNT:", products.count())
     return render(request, 'home.html', {
         'products':products
         
