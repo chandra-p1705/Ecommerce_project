@@ -174,3 +174,24 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+import os
+from urllib.parse import urlparse
+from django.http import JsonResponse
+
+
+def database_check(request):
+    value = os.environ.get("CORRECT_DATABASE_URL")
+
+    if not value:
+        return JsonResponse({
+            "correct_database_url_exists": False
+        })
+
+    parsed = urlparse(value)
+
+    return JsonResponse({
+        "correct_database_url_exists": True,
+        "database_host": parsed.hostname,
+        "database_name": parsed.path.lstrip("/"),
+        "database_port": parsed.port,
+    })
