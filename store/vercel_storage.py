@@ -11,42 +11,39 @@ class VercelBlobStorage(Storage):
         if not token:
             raise Exception("BLOB_READ_WRITE_TOKEN is missing")
 
-        url = f"https://blob.vercel-storage.com/{name}"
-
         response = requests.put(
-            url,
+            "https://blob.vercel-storage.com",
+            params={"pathname": name},
             data=content.read(),
             headers={
                 "Authorization": f"Bearer {token}",
-                "x-api-version": "4",
+                "x-api-version": "7",
+                "x-content-type": getattr(
+                    content, "content_type", "application/octet-stream"
+                ),
             },
         )
 
-        if response.status_code not in [200, 201]:
+        if response.status_code not in (200, 201):
             raise Exception(
-                f"Vercel Blob upload failed: {response.status_code} {response.text}"
+                f"Vercel Blob upload failed: "
+                f"{response.status_code} {response.text}"
             )
 
-        return name
+        result = response.json()
+        return result["url"]
 
     def _open(self, name, mode="rb"):
-        raise NotImplementedError(
-            "Files are stored in Vercel Blob."
-        )
+        raise NotImplementedError("Files are stored in Vercel Blob.")
 
     def exists(self, name):
         return False
 
     def url(self, name):
-        base_url = os.environ.get(
-            "BLOB_BASE_URL",
-            "https://voffn68xw0mkkon1.public.blob.vercel-storage.com"
-        )
-        return f"{base_url}/{name}"
+        return name
 
     def delete(self, name):
         pass
 
     def size(self, name):
         return 0
-
