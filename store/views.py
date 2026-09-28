@@ -194,4 +194,5 @@ def database_check(request):
         "database_host": parsed.hostname,
         "database_name": parsed.path.lstrip("/"),
         "database_port": parsed.port,
+        "product_count": Product.objects.count(),
     })
