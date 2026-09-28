@@ -84,22 +84,21 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 import os
 import dj_database_url
 
-if os.environ.get("DATABASE_URL"):
+if os.environ.get("CORRECT_DATABASE_URL"):
     DATABASES = {
         "default": dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"),
+            default=os.environ.get("CORRECT_DATABASE_URL"),
             conn_max_age=600,
             ssl_require=True,
         )
     }
 else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-
+   DATABASES = {
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
