@@ -24,23 +24,21 @@
 
         {% if cart_items %}
         <div class="cart-layout">
+            <div class="cart-items-list">
             {% for item in cart_items %}
-            <div class="cart_items"></div>
-            <div class="product-card">
+            <div class="cart-item">
 
                 {% if item.product.image %}
                     <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-
                 {% endif %}
+
                 <div class="cart-item-details">
 
                 <h3>{{ item.product.name }}</h3>
 
-                <p>{{ item.product.description }}
-                <p class="price"></p>
+                <p>{{ item.product.description }}</p>
 
                 <h4>Price: ₹{{ item.product.price }}</h4>
-                </p>
 
                 <div class="quantity"> <a href="{% url 'decrease_quantity' item.product.id %}"> 
                     <button>-</button> 
@@ -49,61 +47,59 @@
                  <a href="{% url 'increase_quantity' item.product.id %}"> 
                     <button>+</button> 
                 </a> 
+                </div>
+                <p> Item Total: 
+                    <strong>₹{{ item.item_total }}</strong> 
+                </p> 
+                <a href="{% url 'remove_from_cart' item.product.id %}" class="remove-btn"> Remove </a>
+
+                </div>
             </div>
-            <p> Item Total: 
-                <strong>₹{{ item.item_total }}</strong> 
-            </p> 
-            <a href="{% url 'remove_from_cart' item.product.id %}" class="remove-btn"> Remove </a>
-            
-        </div>
-        </div>
-         {% endfor %}
-         </div>
-         <!-- RIGHT SIDE : ORDER SUMMARY -->
-           <div class="order-summary">
-        <h2>Order Summary</h2> 
-        <div class="summary-row"> 
-            <span>Items</span> 
-            <span>{{ cart_items|length }}</span>
-         </div> 
-         <div class="summary-row"> 
-            <span>Subtotal</span> 
-            <span>₹{{ total_price }}</span>
-         </div> 
-         <div class="summary-row"> 
-            <span>Delivery</span> 
-            <span>FREE</span> 
+             {% endfor %}
+             </div>
+
+             <!-- RIGHT SIDE : ORDER SUMMARY -->
+             <div class="order-summary">
+                <h2>Order Summary</h2> 
+                <div class="summary-row"> 
+                    <span>Items</span> 
+                    <span>{{ cart_items|length }}</span>
+                 </div> 
+                 <div class="summary-row"> 
+                    <span>Subtotal</span> 
+                    <span>₹{{ total_price }}</span>
+                 </div> 
+                 <div class="summary-row"> 
+                    <span>Delivery</span> 
+                    <span>FREE</span> 
+                </div> 
+                <hr> 
+                <div class="summary-total"> 
+                    <span>Total</span> 
+                    <span>₹{{ total_price }}</span> 
+                </div> 
+               <a href="{% url 'checkout' %}">
+                    <button class="checkout-btn">
+                        Checkout
+                    </button>
+                </a>
+                <a href="{% url 'home' %}" class="continue-shopping"> Continue Shopping </a> 
+            </div> 
         </div> 
-        <hr> 
-        <div class="summary-total"> 
-            <span>Total</span> 
-            <span>₹{{ total_price }}</span> 
-        </div> 
-       <a href="{% url 'checkout' %}">
-    <button class="checkout-btn">
-        Checkout
-    </button>
-</a>
-        <a href="{% url 'home' %}" class="continue-shopping"> Continue Shopping </a> 
-    </div> 
-</div> 
-{% else %} 
-<div class="empty-cart">
-    <h3>Your cart is waiting for some goodies!</h3>
-    <br>
+        {% else %} 
+        <div class="empty-cart">
+            <h3>Your cart is waiting for some goodies!</h3>
+            <br>
 
-            <a href="{% url 'home' %}">
-                <button>Continue Shopping</button>
-            </a>
+                    <a href="{% url 'home' %}">
+                        <button>Continue Shopping</button>
+                    </a>
 
-</div>
+        </div>
 
-            
         {% endif %}
 
-
   </main>
-  
 
 </body>
 </html>

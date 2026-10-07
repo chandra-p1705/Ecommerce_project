@@ -46,4 +46,4 @@ class VercelBlobStorage(Storage):
         pass
 
     def size(self, name):
-        return 0
+        return 0    

@@ -26,19 +26,24 @@ def cart(request):
     cart_data = request.session.get('cart', {})
 
     cart_items = []
+    total_price = 0
 
     for product_id, quantity in cart_data.items():
         product = Product.objects.get(id=product_id)
 
+        item_total = product.price * quantity
+        total_price += item_total
+
         cart_items.append({
             'product': product,
-            'quantity': quantity
+            'quantity': quantity,
+            'item_total': item_total
         })
 
     return render(request, 'cart.html', {
-        'cart_items': cart_items
+        'cart_items': cart_items,
+        'total_price': total_price
     })
-
 def increase_quantity(request, product_id):
     cart = request.session.get('cart', {})
     product_id = str(product_id)
