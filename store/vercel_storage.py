@@ -40,8 +40,9 @@ class VercelBlobStorage(Storage):
         return False
 
     def url(self, name):
-        return name
-
+        if name.startswith("http://") or name.startswith("https://"):
+            return name
+            return "/" + name.lstrip("/")
     def delete(self, name):
         pass
 
