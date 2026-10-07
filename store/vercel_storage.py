@@ -1,5 +1,6 @@
 import os
 import requests
+from urllib.parse import quote
 from django.core.files.storage import Storage
 
 
@@ -11,9 +12,12 @@ class VercelBlobStorage(Storage):
         if not token:
             raise Exception("BLOB_READ_WRITE_TOKEN is missing")
 
+        # pathname must be part of the URL, not a query parameter
+        encoded_path = quote(name, safe="/")
+        url = f"https://blob.vercel-storage.com/{encoded_path}"
+
         response = requests.put(
-            "https://blob.vercel-storage.com",
-            params={"pathname": name},
+            url,
             data=content.read(),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -21,6 +25,7 @@ class VercelBlobStorage(Storage):
                 "x-content-type": getattr(
                     content, "content_type", "application/octet-stream"
                 ),
+                "x-add-random-suffix": "0",
             },
         )
 
@@ -42,9 +47,10 @@ class VercelBlobStorage(Storage):
     def url(self, name):
         if name.startswith("http://") or name.startswith("https://"):
             return name
-            return "/" + name.lstrip("/")
+        return "/" + name.lstrip("/")
+
     def delete(self, name):
         pass
 
     def size(self, name):
-        return 0    
+        return 0
